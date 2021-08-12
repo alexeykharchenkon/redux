@@ -1,27 +1,45 @@
 import { Todo } from "@common/types/types";
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from "@store/actions/actionTypes";
 import { initialState } from "@store/initialState";
+import { ADD_TODO_SUCCESS, TOGGLE_TODO, DELETE_TODO, ADD_TODO_STARTED, 
+  ADD_TODO_FAILURE, LOAD_TODOS_SUCCESS, LOAD_TODOS_FAILURE, 
+  LOAD_TODOS_STARTED, DELETE_ALL_TODOS} from "@store/actions/actionTypes";
 
-export const todosReducer = (state: Todo[] = initialState.todos, action: any) => {
+export const todosReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-      case ADD_TODO:
-        return [
+      case ADD_TODO_STARTED:
+        return state
+      case ADD_TODO_FAILURE:
+        return state
+      case ADD_TODO_SUCCESS:
+        return {
           ...state,
-          {
+         todos: [...state.todos, {
             id: action.todo.id,
-            text: action.todo.text,
+            text: action.todo.text,//action.todo.title, if from json holder //
             completed: false
-          }
-        ]
+          }]
+        }
       case TOGGLE_TODO:
-        return state.map((todo: any) => {
-          if (todo.id === action.id) {
-            return { ...todo, completed: !todo.completed }
-          }
-          return todo;
+        return {
+          ...state,
+          todos: state.todos.map((todo: any) => {
+            if (todo.id === action.id) { return { ...todo, completed: !todo.completed }}
+            return todo;
         })
+      }
       case DELETE_TODO:
-        return state.filter(t => t.id !== action.id)
+        return {...state, todos: state.todos.filter((t:Todo) => t.id !== action.id)}
+      case DELETE_ALL_TODOS: 
+        return { ...state, todos: [] }   
+      case LOAD_TODOS_SUCCESS:
+        return {
+          ...state,
+          todos: [...state.todos, ...action.todos.map((todo: any) => ({ ...todo, text: todo.title }))]
+        }
+      case LOAD_TODOS_FAILURE:
+        return state
+      case LOAD_TODOS_STARTED:
+        return state
       default:
         return state;
     }

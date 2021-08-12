@@ -16,7 +16,7 @@ interface TodoItemProps {
 export const TodoItem = ({todo, toggleTodo, deleteTodo, index} : TodoItemProps) => {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <Card className={classes.todoItem}>
         <div style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
           {index + 1}) {todo.text}
         </div>

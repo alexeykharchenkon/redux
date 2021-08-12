@@ -9,9 +9,10 @@ import { TodoList } from '@components/TodoList';
 import { useStyles } from '@styles/material';
 import Typography from '@material-ui/core/Typography';
 import '@styles/main.css';
+import { useEffect } from 'react';
 
 const mapStateToProps = (state: any) => ({
-    todos: state.todosState
+    todos: state.todosState.todos
 })
 const mapDispatchToProps = (dispatch: any) => ({
     actions: bindActionCreators(todosActions, dispatch)
@@ -24,20 +25,31 @@ interface AppProps {
 
 const App = ({todos, actions} : AppProps) => {
   const classes = useStyles();
-  const { addTodo, toggleTodo, deleteTodo } = actions;
+  const { addTodo, toggleTodo, deleteTodo, loadTodos, deleteAllTodos } = actions;
+
+  useEffect(() => { loadTodos(todos.length, 5) }, [loadTodos]);
 
   return (
-    <Card className={classes.app}>
-      <Typography variant="h4">
-        Todo List
-      </Typography>
-      <AddTodo addTodo={addTodo} />
-      <TodoList 
-        todos={todos} 
-        toggleTodo={toggleTodo} 
-        deleteTodo={deleteTodo}
+    <div className="main">
+      <Card className={classes.todoList}>
+        <Typography variant="h4">
+          Todo List
+        </Typography>
+        <TodoList 
+          todos={todos} 
+          toggleTodo={toggleTodo} 
+          deleteTodo={deleteTodo}
         />
-    </Card>
+      </Card>
+      <Card className={classes.addTodo}>
+          <AddTodo 
+            addTodo={addTodo} 
+            loadTodos={loadTodos}
+            deleteAllTodos={deleteAllTodos}
+            todosCount={todos.length}
+          />
+      </Card>
+    </div>
   );
 }
 

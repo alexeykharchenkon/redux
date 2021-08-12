@@ -8,6 +8,19 @@ body {
     background-color: #80cbc4;
 }
 
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: flex-start;
+}
+
+.addTodoMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .form {
     display: flex;
     align-items: center;
