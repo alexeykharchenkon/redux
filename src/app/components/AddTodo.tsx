@@ -12,12 +12,7 @@ interface AddTodoProps {
 }
 
 export const AddTodo = ({addTodo, loadTodos, todosCount, deleteAllTodos} : AddTodoProps) => {
-  const [text, setText] = useState<string>("");
-
-  const addTodoClick = () => {
-    addTodo({id: uuidv4(), text});
-    setText("");
-  }
+  const [title, setTitle] = useState<string>("");
 
   return (
     <div className="addTodoMain">
@@ -26,13 +21,16 @@ export const AddTodo = ({addTodo, loadTodos, todosCount, deleteAllTodos} : AddTo
         </Typography>
       <div className="form">
         <TextField 
-            value={text}
-            name="text" 
+            value={title}
+            name="title" 
             label="Enter Todo" 
-            onChange={e => setText(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
         />
         <Button 
-            onClick={addTodoClick}
+            onClick={() => {
+              addTodo({id: uuidv4(), title});
+              setTitle("");
+            }}
             variant="contained" color="primary"
             style={{marginLeft: '10px'}}
         >

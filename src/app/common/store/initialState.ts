@@ -1,7 +1,7 @@
 export const initialState = {
   todos: [{
     id: '1',
-    text: "Hello Redux",
+    title: "Hello Redux",
     completed: false
   }]
 }

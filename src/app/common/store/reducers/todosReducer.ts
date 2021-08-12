@@ -2,7 +2,7 @@ import { Todo } from "@common/types/types";
 import { initialState } from "@store/initialState";
 import { ADD_TODO_SUCCESS, TOGGLE_TODO, DELETE_TODO, ADD_TODO_STARTED, 
   ADD_TODO_FAILURE, LOAD_TODOS_SUCCESS, LOAD_TODOS_FAILURE, 
-  LOAD_TODOS_STARTED, DELETE_ALL_TODOS} from "@store/actions/actionTypes";
+  LOAD_TODOS_STARTED, DELETE_ALL_TODOS} from "@app/common/store/actions/actionTodoTypes";
 
 export const todosReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
@@ -15,7 +15,7 @@ export const todosReducer = (state: any = initialState, action: any) => {
           ...state,
          todos: [...state.todos, {
             id: action.todo.id,
-            text: action.todo.text,//action.todo.title, if from json holder //
+            title: action.todo.title,
             completed: false
           }]
         }
@@ -34,7 +34,7 @@ export const todosReducer = (state: any = initialState, action: any) => {
       case LOAD_TODOS_SUCCESS:
         return {
           ...state,
-          todos: [...state.todos, ...action.todos.map((todo: any) => ({ ...todo, text: todo.title }))]
+          todos: [...state.todos, ...action.todos.map((todo: any) => ({ ...todo }))]
         }
       case LOAD_TODOS_FAILURE:
         return state

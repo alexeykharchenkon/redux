@@ -30,5 +30,12 @@ export const useStyles = makeStyles({
     padding: '10px',
     backgroundColor: '#b2fef7',
     marginLeft: '10px',
+  },
+  filter: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '5px 15px',
+    margin: '5px',
   }
 });

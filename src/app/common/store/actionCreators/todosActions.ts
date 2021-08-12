@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Todo } from "@common/types/types";
 import { ADD_TODO_FAILURE, ADD_TODO_STARTED, ADD_TODO_SUCCESS, 
   DELETE_ALL_TODOS, DELETE_TODO, LOAD_TODOS_FAILURE, LOAD_TODOS_STARTED, 
-  LOAD_TODOS_SUCCESS, TOGGLE_TODO } from "@store/actions/actionTypes";
+  LOAD_TODOS_SUCCESS, TOGGLE_TODO } from "@app/common/store/actions/actionTodoTypes";
 
 export const addTodo = (todo: Todo) => {
     return (dispatch : any) => {

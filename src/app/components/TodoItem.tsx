@@ -18,11 +18,11 @@ export const TodoItem = ({todo, toggleTodo, deleteTodo, index} : TodoItemProps) 
   return (
     <Card className={classes.todoItem}>
         <div style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
-          {index + 1}) {todo.text}
+          {index + 1}) {todo.title}
         </div>
         <div>
           <Checkbox
-            checked={todo.completed}
+            checked={ todo.completed }
             onChange={() => toggleTodo(todo.id)}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
